@@ -8,7 +8,7 @@ import System.Process
 import Control.Monad (when, void, unless)
 
 usage :: String
-usage = version ++ "\nUsage: heureka [help|setup]\nhelp - Prints this help menu\nsetup - Sets up a git repository"
+usage = version ++ "\nUsage: heureka [help|setup|new]\n\nhelp - Prints this help menu\nsetup - Sets up a git repository\nnew [filename] - opens up an editor with a new note. Will generate a filename if called with no `filename` argument.\n\nexamples:\n- `heureka new idea1`\n- `heureka new`"
 
 exec :: String -> [String] -> IO ExitCode
 exec cmd args = do
@@ -25,8 +25,9 @@ main :: IO ()
 main = getArgs >>= parse
 
 parse :: [String] -> IO ()
-parse [] = new Nothing
+parse [] = putStrLn usage >> exitSuccess
 parse ["new", n] = new (Just n)
+parse ["new"] = new Nothing
 parse ["help"] = putStrLn usage >> exitSuccess
 parse ["setup"] = setup
 parse _ = putStrLn usage >> exitSuccess
