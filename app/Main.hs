@@ -6,6 +6,7 @@ import System.IO
 import System.Directory
 import System.Process
 import Control.Monad (when, void, unless)
+import Data.List (isSuffixOf)
 
 usage :: String
 usage = version ++ "\nUsage: heureka [help|setup|new]\n\nhelp - Prints this help menu\nsetup - Sets up a git repository\nnew [filename] - opens up an editor with a new note. Will generate a filename if called with no `filename` argument.\n\nexamples:\n- `heureka new idea1`\n- `heureka new`"
@@ -48,7 +49,7 @@ new filename = do
 
   editor <- getEnv "EDITOR"
   void $ case filename of
-    Just n -> exec editor [n]
+    Just n -> if ".md" `isSuffixOf` n then exec editor [n] else exec editor [n ++ ".md"]
     Nothing -> do
       output <- readCreateProcess (shell $ "date" ++ " +\"%Y%m%d-%H%M%S\"") ""
       exec editor [init output ++ ".md"]
