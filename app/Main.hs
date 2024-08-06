@@ -26,20 +26,32 @@ main :: IO ()
 main = getArgs >>= parse
 
 parse :: [String] -> IO ()
-parse [] = new
+parse [] = new Nothing
+parse ["new", n] = new (Just n)
 parse ["help"] = putStrLn usage >> exitSuccess
 parse ["setup"] = setup
 parse _ = putStrLn usage >> exitSuccess
 
-new :: IO ()
-new = do
+new :: Maybe String -> IO ()
+new filename = do
   user <- getEnv "USER"
   exists <- doesDirectoryExist $ dirPath user
   isRepo <- isGitRepo
 
   unless (exists && isRepo) $ do
     putStrLn "Your data directory has not been initialized. Run `heureka setup` first."
-
+  
+  setCurrentDirectory $ dirPath user
+  editor <- getEnv "EDITOR"
+  void $ case filename of
+    Just n -> exec editor [n]
+    Nothing -> do
+      output <- readCreateProcess (shell $ "date" ++ " +\"%Y%m%d-%H%M%S\"") ""
+      exec editor [init output ++ ".md"]
+  void $ exec "git" ["add", "."]
+  void $ exec "git" ["commit", "-m", "Heureka: Automated commit"]
+  void $ exec "git" ["push", "-u", "origin", "main"]
+  
 setup :: IO ()
 setup = do
   user <- getEnv "USER"
