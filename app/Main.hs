@@ -36,12 +36,16 @@ new :: Maybe String -> IO ()
 new filename = do
   user <- getEnv "USER"
   exists <- doesDirectoryExist $ dirPath user
-  isRepo <- isGitRepo
 
-  unless (exists && isRepo) $ do
+  unless exists $ do
     putStrLn "Your data directory has not been initialized. Run `heureka setup` first."
   
   setCurrentDirectory $ dirPath user
+
+  isRepo <- isGitRepo
+  unless isRepo  $ do
+    putStrLn "Your data directory has not been initialized. Run `heureka setup` first."
+
   editor <- getEnv "EDITOR"
   void $ case filename of
     Just n -> exec editor [n]
