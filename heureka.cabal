@@ -6,12 +6,12 @@ cabal-version: 2.2
 
 name:           heureka
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/heureka#readme>
-homepage:       https://github.com/githubuser/heureka#readme
-bug-reports:    https://github.com/githubuser/heureka/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2024 Author name here
+description:    Please see the README on GitHub at <https://github.com/vlimki/heureka#readme>
+homepage:       https://github.com/vlimki/heureka#readme
+bug-reports:    https://github.com/vlimki/heureka/issues
+author:         Juho Välimäki
+maintainer:     root@vlimki.dev
+copyright:      2024 Juho Välimäki
 license:        BSD-3-Clause
 license-file:   LICENSE
 build-type:     Simple
@@ -21,26 +21,9 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/heureka
+  location: https://github.com/vlimki/heureka
 
-library
-  exposed-modules:
-      Lib
-  other-modules:
-      Paths_heureka
-  autogen-modules:
-      Paths_heureka
-  hs-source-dirs:
-      src
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
-  build-depends:
-      base >=4.7 && <5
-    , directory
-    , process
-    , regex-posix
-  default-language: Haskell2010
-
-executable heureka-exe
+executable heureka
   main-is: Main.hs
   other-modules:
       Paths_heureka
@@ -52,25 +35,6 @@ executable heureka-exe
   build-depends:
       base >=4.7 && <5
     , directory
-    , heureka
-    , process
-    , regex-posix
-  default-language: Haskell2010
-
-test-suite heureka-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_heureka
-  autogen-modules:
-      Paths_heureka
-  hs-source-dirs:
-      test
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , directory
-    , heureka
     , process
     , regex-posix
   default-language: Haskell2010

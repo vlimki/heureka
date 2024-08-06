@@ -1,6 +1,5 @@
 module Main (main) where
 
-import Lib
 import System.Environment
 import System.Exit
 import System.IO
