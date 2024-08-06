@@ -16,7 +16,7 @@ exec cmd args = do
   waitForProcess h
 
 version :: String
-version = "heureka 0.0.1 - back up ideas to git"
+version = "heureka 0.0.1 - back up ideas via git"
 
 dirPath :: String -> String
 dirPath user = if user == "root" then "/root/.heureka" else "/home/" ++ user ++ "/.heureka"

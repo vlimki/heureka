@@ -1,7 +1,7 @@
 # heureka - back up ideas quickly via git
 
 ```
-heureka 0.0.1 - back up ideas to git
+heureka 0.0.1 - back up ideas via git
 Usage: heureka [help|setup|new]
 
 help - Prints this help menu
